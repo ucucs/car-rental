@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucucs.rental.dao.ext.CarRentalExtMapper">
+
+  <select id="queryCarList" resultType="com.ucucs.rental.dto.StockCarDto">
+    select *
+    from car_stock_rental
+    where stock_id = #{stockId,jdbcType=INTEGER}
+  </select>
+
+</mapper>

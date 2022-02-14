@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucucs.rental.dao.CarModelMapper">
+  <resultMap id="BaseResultMap" type="com.ucucs.rental.entity.CarModel">
+    <id column="car_id" jdbcType="INTEGER" property="carId" />
+    <result column="car_name" jdbcType="VARCHAR" property="carName" />
+    <result column="brand_id" jdbcType="INTEGER" property="brandId" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="onlined" jdbcType="BIT" property="onlined" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    car_id, car_name, brand_id, type_id, picture, price, onlined, deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_model
+    where car_id = #{carId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_model
+    where car_id = #{carId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ucucs.rental.entity.CarModel">
+    <selectKey keyProperty="carId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into car_model (car_name, brand_id, type_id, 
+      picture, price, onlined, 
+      deleted)
+    values (#{carName,jdbcType=VARCHAR}, #{brandId,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, 
+      #{picture,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{onlined,jdbcType=BIT}, 
+      #{deleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ucucs.rental.entity.CarModel">
+    <selectKey keyProperty="carId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into car_model
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="carName != null">
+        car_name,
+      </if>
+      <if test="brandId != null">
+        brand_id,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="onlined != null">
+        onlined,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="carName != null">
+        #{carName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null">
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="onlined != null">
+        #{onlined,jdbcType=BIT},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ucucs.rental.entity.CarModel">
+    update car_model
+    <set>
+      <if test="carName != null">
+        car_name = #{carName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="onlined != null">
+        onlined = #{onlined,jdbcType=BIT},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where car_id = #{carId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ucucs.rental.entity.CarModel">
+    update car_model
+    set car_name = #{carName,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=INTEGER},
+      picture = #{picture,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      onlined = #{onlined,jdbcType=BIT},
+      deleted = #{deleted,jdbcType=BIT}
+    where car_id = #{carId,jdbcType=INTEGER}
+  </update>
+</mapper>

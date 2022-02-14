@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucucs.rental.dao.CarModelDetailMapper">
+  <resultMap id="BaseResultMap" type="com.ucucs.rental.entity.CarModelDetail">
+    <id column="car_id" jdbcType="INTEGER" property="carId" />
+    <result column="product_year" jdbcType="VARCHAR" property="productYear" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="seat" jdbcType="INTEGER" property="seat" />
+    <result column="door" jdbcType="INTEGER" property="door" />
+    <result column="gps" jdbcType="BIT" property="gps" />
+    <result column="fuel" jdbcType="VARCHAR" property="fuel" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    car_id, product_year, level, seat, door, gps, fuel, describe
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_model_detail
+    where car_id = #{carId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_model_detail
+    where car_id = #{carId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ucucs.rental.entity.CarModelDetail">
+    insert into car_model_detail (car_id, product_year, level, 
+      seat, door, gps, fuel, 
+      describe)
+    values (#{carId,jdbcType=INTEGER}, #{productYear,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, 
+      #{seat,jdbcType=INTEGER}, #{door,jdbcType=INTEGER}, #{gps,jdbcType=BIT}, #{fuel,jdbcType=VARCHAR}, 
+      #{describe,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ucucs.rental.entity.CarModelDetail">
+    insert into car_model_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="carId != null">
+        car_id,
+      </if>
+      <if test="productYear != null">
+        product_year,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="seat != null">
+        seat,
+      </if>
+      <if test="door != null">
+        door,
+      </if>
+      <if test="gps != null">
+        gps,
+      </if>
+      <if test="fuel != null">
+        fuel,
+      </if>
+      <if test="describe != null">
+        describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="carId != null">
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="productYear != null">
+        #{productYear,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null">
+        #{seat,jdbcType=INTEGER},
+      </if>
+      <if test="door != null">
+        #{door,jdbcType=INTEGER},
+      </if>
+      <if test="gps != null">
+        #{gps,jdbcType=BIT},
+      </if>
+      <if test="fuel != null">
+        #{fuel,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ucucs.rental.entity.CarModelDetail">
+    update car_model_detail
+    <set>
+      <if test="productYear != null">
+        product_year = #{productYear,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null">
+        seat = #{seat,jdbcType=INTEGER},
+      </if>
+      <if test="door != null">
+        door = #{door,jdbcType=INTEGER},
+      </if>
+      <if test="gps != null">
+        gps = #{gps,jdbcType=BIT},
+      </if>
+      <if test="fuel != null">
+        fuel = #{fuel,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where car_id = #{carId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ucucs.rental.entity.CarModelDetail">
+    update car_model_detail
+    set product_year = #{productYear,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      seat = #{seat,jdbcType=INTEGER},
+      door = #{door,jdbcType=INTEGER},
+      gps = #{gps,jdbcType=BIT},
+      fuel = #{fuel,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR}
+    where car_id = #{carId,jdbcType=INTEGER}
+  </update>
+</mapper>
